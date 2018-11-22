@@ -398,7 +398,7 @@ static NSString *const MessageHanderName = @"ReactNative";
         decisionHandler(WKNavigationActionPolicyAllow);
     } else {
         NSMutableURLRequest *newRequest = [[NSMutableURLRequest alloc] initWithURL:request.URL];
-        [newRequest setValue:headerValue forHTTPHeaderField:headerField;
+        [newRequest setValue:headerValue forHTTPHeaderField:headerField];
         decisionHandler(WKNavigationActionPolicyCancel);
         [self.webView loadRequest:newRequest];
     }
