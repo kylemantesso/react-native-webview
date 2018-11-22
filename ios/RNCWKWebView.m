@@ -391,8 +391,17 @@ static NSString *const MessageHanderName = @"ReactNative";
     }
   }
 
-  // Allow all navigation by default
-  decisionHandler(WKNavigationResponsePolicyAllow);
+    NSString *headerField = @"x-mobile-app";
+    NSString *headerValue = @"OriginMobileApp";
+    
+    if([[navigationAction.request valueForHTTPHeaderField:headerField] isEqualToString:headerValue]) {
+        decisionHandler(WKNavigationActionPolicyAllow);
+    } else {
+        NSMutableURLRequest *newRequest = [[NSMutableURLRequest alloc] initWithURL:request.URL];
+        [newRequest setValue:headerValue forHTTPHeaderField:headerField;
+        decisionHandler(WKNavigationActionPolicyCancel);
+        [self.webView loadRequest:newRequest];
+    }
 }
 
 /**
